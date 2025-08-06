@@ -1,0 +1,2960 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kāzas - Viesu nams "Ūdensdzirnavas"</title>
+         <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --white: #f3f3f3;
+            --overlay-dark: rgba(34, 34, 34, 0.55);
+            --overlay-gradient: linear-gradient(180deg, rgba(34,34,34,0.55) 60%, rgba(34,34,34,0.85) 100%);
+            --headline-size: 3.5rem;
+            --subheadline-size: 1.35rem;
+            --button-radius: 999px;
+            --button-padding: 0.9em 2.2em;
+            --transition: 0.25s cubic-bezier(.4,0,.2,1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            background: #FAF0E6;
+            color: #222;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: #FAF0E6;
+            box-shadow: 0 2px 16px rgba(34,34,34,0.13);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #222;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #222;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--gold);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #FAF0E6;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-top: 1px solid #e0e0e0;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 2rem;
+            color: #222;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            background-color: #f0e6d6;
+            color: var(--gold);
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 0;
+            position: relative;
+            height: 60vh;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+                 .slide {
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             opacity: 0;
+             transition: opacity 1s ease-in-out;
+             background-size: cover;
+             background-position: center bottom;
+             background-repeat: no-repeat;
+         }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .banketu-slide {
+            background-position: center center !important;
+        }
+
+        .kazas-slide {
+            background-position: center center !important;
+        }
+
+        .ceremonija-slide {
+            background-position: center 80% !important;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .slide-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .slide-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 3;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: white;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            padding: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            z-index: 3;
+        }
+
+        .slider-arrow:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .slider-arrow.prev {
+            left: 2rem;
+        }
+
+        .slider-arrow.next {
+            right: 2rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        /* Side Decorative Elements */
+        .side-decoration {
+            position: absolute;
+            top: 0;
+            width: 80px;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .side-decoration.left {
+            left: -100px;
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.03) 0%, transparent 100%);
+        }
+
+        .side-decoration.right {
+            right: -100px;
+            background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.03) 100%);
+        }
+
+        .side-decoration::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1px;
+            height: 300px;
+            background: linear-gradient(180deg, transparent, var(--gold), transparent);
+            opacity: 0.3;
+        }
+
+        .side-decoration .decorative-element {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--gold);
+            opacity: 0.3;
+        }
+
+        .side-decoration.left .decorative-element:nth-child(1) {
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-decoration.left .decorative-element:nth-child(2) {
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-decoration.left .decorative-element:nth-child(3) {
+            top: 60%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-decoration.left .decorative-element:nth-child(4) {
+            top: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-decoration.right .decorative-element:nth-child(1) {
+            top: 25%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .side-decoration.right .decorative-element:nth-child(2) {
+            top: 45%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .side-decoration.right .decorative-element:nth-child(3) {
+            top: 65%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .side-decoration.right .decorative-element:nth-child(4) {
+            top: 85%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .side-decoration.left .decorative-element:nth-child(1) {
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-decoration.left .decorative-element:nth-child(2) {
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-decoration.left .decorative-element:nth-child(3) {
+            top: 60%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-decoration.left .decorative-element:nth-child(4) {
+            top: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-decoration.right .decorative-element:nth-child(1) {
+            top: 25%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .side-decoration.right .decorative-element:nth-child(2) {
+            top: 45%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .side-decoration.right .decorative-element:nth-child(3) {
+            top: 65%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .side-decoration.right .decorative-element:nth-child(4) {
+            top: 85%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        /* Additional decorative elements positioning */
+        .side-decoration.left .decorative-element:nth-child(5) {
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-decoration.left .decorative-element:nth-child(6) {
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-decoration.left .decorative-element:nth-child(7) {
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-decoration.left .decorative-element:nth-child(8) {
+            top: 70%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-decoration.right .decorative-element:nth-child(5) {
+            top: 5%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .side-decoration.right .decorative-element:nth-child(6) {
+            top: 25%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .side-decoration.right .decorative-element:nth-child(7) {
+            top: 45%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .side-decoration.right .decorative-element:nth-child(8) {
+            top: 65%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        /* Additional decorative elements for content sections */
+        .content-decoration {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--gold);
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .content-decoration.top-left {
+            top: 10%;
+            left: -50px;
+            animation: contentFloat 10s ease-in-out infinite;
+        }
+
+        .content-decoration.top-right {
+            top: 15%;
+            right: -50px;
+            animation: contentFloat 12s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        .content-decoration.bottom-left {
+            bottom: 10%;
+            left: -50px;
+            animation: contentFloat 8s ease-in-out infinite;
+            animation-delay: 4s;
+        }
+
+        .content-decoration.bottom-right {
+            bottom: 15%;
+            right: -50px;
+            animation: contentFloat 14s ease-in-out infinite;
+            animation-delay: 6s;
+        }
+
+        @keyframes contentFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.1;
+            }
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+                opacity: 0.2;
+            }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #222;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        .main-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 3rem;
+            position: relative;
+            letter-spacing: 2px;
+
+        }
+
+        .main-headline::before,
+        .main-headline::after {
+            content: '❦';
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin: 0 1.5rem;
+            opacity: 0.8;
+        }
+
+        /* Wedding Introduction Section */
+        .wedding-intro-section {
+            position: relative;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8f6f0 0%, #ffffff 50%, #f8f6f0 100%);
+            overflow: hidden;
+        }
+
+        .wedding-intro-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .wedding-intro-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .wedding-intro-section .floating-decoration {
+            position: absolute;
+            font-size: 2.5rem;
+            color: var(--gold);
+            opacity: 0.08;
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .wedding-intro-section .floating-decoration:nth-child(1) {
+            top: 15%;
+            left: 8%;
+            animation-delay: 0s;
+        }
+
+        .wedding-intro-section .floating-decoration:nth-child(2) {
+            top: 25%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        .wedding-intro-section .floating-decoration:nth-child(3) {
+            bottom: 20%;
+            left: 12%;
+            animation-delay: 6s;
+        }
+
+        .wedding-intro-section .floating-decoration:nth-child(4) {
+            bottom: 30%;
+            right: 8%;
+            animation-delay: 2s;
+        }
+
+        /* Wedding Introduction Styles */
+        .wedding-intro {
+            background: linear-gradient(135deg, #ffffff 0%, #faf9f5 100%);
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 4rem;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.15);
+            overflow: hidden;
+        }
+
+        .wedding-intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--gold), #b8941f, var(--gold));
+            border-radius: 25px 25px 0 0;
+        }
+
+        .wedding-intro::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .wedding-intro .corner-decoration {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(212, 175, 55, 0.2);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .wedding-intro .corner-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .wedding-intro .corner-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .wedding-intro .corner-decoration.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .wedding-intro .corner-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .wedding-intro:hover .corner-decoration {
+            opacity: 1;
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .intro-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+            text-align: center;
+            font-weight: 500;
+            position: relative;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.1) 100%);
+            border-radius: 15px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .intro-text::before,
+        .intro-text::after {
+            content: '❦';
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin: 0 1rem;
+            opacity: 0.7;
+        }
+
+
+
+        .features-list {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.12);
+            border: 1px solid #e2d7b7;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features-list::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), #b8941f, var(--gold));
+        }
+
+        .features-list h3 {
+            color: #222;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .features-list h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        .features-list h3::before {
+            content: '💒';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            opacity: 0.8;
+        }
+
+        .features-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+            position: relative;
+            padding-left: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+        }
+
+        .features-list li:hover {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.1) 100%);
+            border-radius: 8px;
+            padding-left: 3.5rem;
+            transform: translateX(5px);
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li::before {
+            content: '💫';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .features-list li:hover::before {
+            transform: scale(1.2);
+            content: '✨';
+        }
+
+        .intro-quote {
+            background: var(--gold);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .intro-quote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: rgba(255,255,255,0.2);
+            font-family: serif;
+        }
+
+        .intro-quote p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .intro-quote em {
+            font-style: italic;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .availability-info {
+            background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+            border: 2px solid #28a745;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.15);
+            overflow: hidden;
+        }
+
+        .availability-info::before {
+            content: '💝';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        .availability-info::after {
+            content: '💝';
+            position: absolute;
+            bottom: -10px;
+            right: 20px;
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        .availability-info .corner-decoration {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(40, 167, 69, 0.3);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .availability-info .corner-decoration.top-left {
+            top: 15px;
+            left: 15px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .availability-info .corner-decoration.top-right {
+            top: 15px;
+            right: 15px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .availability-info .corner-decoration.bottom-left {
+            bottom: 15px;
+            left: 15px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .availability-info .corner-decoration.bottom-right {
+            bottom: 15px;
+            right: 15px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .availability-info:hover .corner-decoration {
+            opacity: 1;
+            border-color: rgba(40, 167, 69, 0.5);
+        }
+
+        .availability-info p {
+            margin: 0.8rem 0;
+            font-weight: 500;
+            color: #155724;
+            position: relative;
+            z-index: 1;
+        }
+
+        .availability-info p:first-child {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f5132;
+        }
+
+                 /* Gallery Styles */
+         .gallery-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+             gap: 1.5rem;
+             margin-bottom: 4rem;
+         }
+
+         .gallery-item {
+             position: relative;
+             border-radius: 15px;
+             overflow: hidden;
+             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+             cursor: pointer;
+         }
+
+         .gallery-item:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+         }
+
+                   .gallery-image {
+              width: 100%;
+              height: 250px;
+              object-fit: cover;
+              object-position: center bottom;
+              transition: transform 0.3s ease;
+          }
+
+         .gallery-item:hover .gallery-image {
+             transform: scale(1.05);
+         }
+
+         .gallery-overlay {
+             position: absolute;
+             bottom: 0;
+             left: 0;
+             right: 0;
+             background: linear-gradient(transparent, rgba(0,0,0,0.8));
+             color: white;
+             padding: 2rem 1.5rem 1.5rem;
+             transform: translateY(100%);
+             transition: transform 0.3s ease;
+         }
+
+         .gallery-item:hover .gallery-overlay {
+             transform: translateY(0);
+         }
+
+         .gallery-overlay h3 {
+             font-size: 1.3rem;
+             font-weight: 600;
+             margin-bottom: 0.5rem;
+             color: white;
+         }
+
+         .gallery-overlay p {
+             font-size: 0.9rem;
+             line-height: 1.4;
+             color: rgba(255,255,255,0.9);
+             margin: 0;
+         }
+
+        /* Reviews Styles */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .review-card {
+            background: linear-gradient(135deg, #ffffff 0%, #faf9f5 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.12);
+            border: 1px solid #e2d7b7;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .review-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            opacity: 0.3;
+        }
+
+        .review-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(212, 175, 55, 0.15);
+            border-color: #d4af37;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-stars {
+            color: #ffd700;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .review-date {
+            color: #666;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .review-content {
+            margin-bottom: 2rem;
+        }
+
+        .review-content p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #2c3e50;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .review-author {
+            border-top: 1px solid #e2d7b7;
+            padding-top: 1.5rem;
+        }
+
+        .author-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #222;
+            margin: 0 0 0.3rem 0;
+        }
+
+                 .author-info span {
+             color: #666;
+             font-size: 0.9rem;
+             font-weight: 500;
+         }
+
+        /* Wedding Gallery Styles */
+        .wedding-gallery-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8f6f0 0%, #ffffff 50%, #f8f6f0 100%);
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            overflow: hidden;
+        }
+
+        .wedding-gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .wedding-gallery-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .wedding-gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .gallery-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #777;
+            margin-bottom: 3rem;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .gallery-subtitle::before,
+        .gallery-subtitle::after {
+            content: '❦';
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            opacity: 0.7;
+        }
+
+        .wedding-gallery-container {
+            position: relative;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        .wedding-gallery-container::before,
+        .wedding-gallery-container::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            z-index: 5;
+        }
+
+        .wedding-gallery-container::before {
+            left: -30px;
+        }
+
+        .wedding-gallery-container::after {
+            right: -30px;
+        }
+
+        .wedding-gallery {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 0.5rem 0 0.5rem 0;
+            padding-right: 20px;
+            position: relative;
+        }
+
+
+
+        .wedding-gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 320px;
+            height: 280px;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .gallery-item.large {
+            width: 480px;
+            height: 280px;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.1) 50%, transparent 70%);
+            border-radius: 15px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item::after {
+            content: '💍';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2rem;
+            opacity: 0.6;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .gallery-item .corner-decoration {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .gallery-item .corner-decoration.top-left {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .gallery-item .corner-decoration.top-right {
+            top: 10px;
+            right: 10px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .gallery-item .corner-decoration.bottom-left {
+            bottom: 10px;
+            left: 10px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .gallery-item .corner-decoration.bottom-right {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .gallery-item:hover .corner-decoration {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .gallery-item.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.85) 0%, rgba(0,0,0,0.75) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .overlay-content {
+            color: white;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .overlay-content {
+            transform: translateY(0);
+        }
+
+        .overlay-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .overlay-content p {
+            font-size: 0.9rem;
+            opacity: 0.95;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--gold);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .gallery-arrow:hover {
+            background: var(--gold);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .gallery-arrow-left {
+            left: 0;
+        }
+
+        .gallery-arrow-right {
+            right: 0;
+        }
+
+        /* Floating decorative elements */
+        .wedding-gallery-section .floating-decoration {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--gold);
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .wedding-gallery-section .floating-decoration:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .wedding-gallery-section .floating-decoration:nth-child(2) {
+            top: 20%;
+            right: 8%;
+            animation-delay: 2s;
+        }
+
+        .wedding-gallery-section .floating-decoration:nth-child(3) {
+            bottom: 15%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+
+        .wedding-gallery-section .floating-decoration:nth-child(4) {
+            bottom: 25%;
+            right: 5%;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        /* Bottom decoration */
+        .gallery-bottom-decoration {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 3rem;
+            gap: 2rem;
+        }
+
+        .decoration-line {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .decoration-symbol {
+            color: var(--gold);
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+
+        /* Gallery Modal Styles */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            height: 80%;
+            max-height: 600px;
+            margin: auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            z-index: 1001;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            font-size: 2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: white;
+        }
+
+        .modal-gallery {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .modal-gallery-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-gallery-item.active {
+            opacity: 1;
+        }
+
+        .modal-gallery-item img {
+            width: 100%;
+            height: 70%;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-item-info {
+            padding: 1.5rem;
+            background: white;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .modal-item-info h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-item-info p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .modal-navigation {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1002;
+        }
+
+        .modal-nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .modal-nav-btn:hover {
+            background: white;
+        }
+
+        .modal-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .modal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .modal-dot.active {
+            background: white;
+        }
+
+        /* Additional Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            border: 1px solid #dee2e6;
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #222;
+        }
+
+        .service-description {
+            color: #6c757d;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+                 /* Amenities Section */
+         .amenities-section {
+             padding: 4rem 0;
+             background: linear-gradient(135deg, #f8f6f0 0%, #ffffff 50%, #f8f6f0 100%);
+             position: relative;
+             width: 100vw;
+             margin-left: calc(-50vw + 50%);
+             overflow: hidden;
+         }
+
+         .amenities-section::before {
+             content: '';
+             position: absolute;
+             top: 0;
+             left: 0;
+             right: 0;
+             height: 1px;
+             background: linear-gradient(90deg, transparent, var(--gold), transparent);
+         }
+
+         .amenities-section::after {
+             content: '';
+             position: absolute;
+             bottom: 0;
+             left: 0;
+             right: 0;
+             height: 1px;
+             background: linear-gradient(90deg, transparent, var(--gold), transparent);
+         }
+         
+         .amenities-section .container {
+             max-width: 1600px;
+             margin: 0 auto;
+             padding: 0 3rem;
+         }
+         
+         .amenities-section h2 {
+             font-family: 'Playfair Display', serif;
+             font-size: 2.5rem;
+             font-weight: 700;
+             text-align: center;
+             color: #222;
+             margin-bottom: 3rem;
+             position: relative;
+         }
+
+         .amenities-section h2::before,
+         .amenities-section h2::after {
+             content: '❦';
+             color: var(--gold);
+             font-size: 1.8rem;
+             margin: 0 1rem;
+             opacity: 0.7;
+         }
+         
+         .amenities-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+             gap: 2rem;
+             margin-top: 2rem;
+         }
+         
+         .amenity {
+             background: linear-gradient(135deg, #ffffff 0%, #faf9f5 100%);
+             padding: 2.5rem 2rem;
+             border-radius: 12px;
+             box-shadow: 0 8px 25px rgba(212, 175, 55, 0.08);
+             border: 1px solid rgba(212, 175, 55, 0.1);
+             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+             text-align: center;
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             gap: 1rem;
+             position: relative;
+             overflow: hidden;
+         }
+
+         .amenity::before {
+             content: '';
+             position: absolute;
+             top: -5px;
+             left: -5px;
+             right: -5px;
+             bottom: -5px;
+             background: linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.1) 50%, transparent 70%);
+             border-radius: 15px;
+             z-index: -1;
+             opacity: 0;
+             transition: opacity 0.3s ease;
+         }
+         
+         .amenity:hover {
+             transform: translateY(-6px) scale(1.01);
+             box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
+             border-color: rgba(212, 175, 55, 0.3);
+         }
+
+         .amenity:hover::before {
+             opacity: 1;
+         }
+         
+         .amenity .corner-decoration {
+             position: absolute;
+             width: 20px;
+             height: 20px;
+             border: 2px solid rgba(212, 175, 55, 0.3);
+             opacity: 0;
+             transition: all 0.3s ease;
+         }
+
+         .amenity .corner-decoration.top-left {
+             top: 10px;
+             left: 10px;
+             border-right: none;
+             border-bottom: none;
+         }
+
+         .amenity .corner-decoration.top-right {
+             top: 10px;
+             right: 10px;
+             border-left: none;
+             border-bottom: none;
+         }
+
+         .amenity .corner-decoration.bottom-left {
+             bottom: 10px;
+             left: 10px;
+             border-right: none;
+             border-top: none;
+         }
+
+         .amenity .corner-decoration.bottom-right {
+             bottom: 10px;
+             right: 10px;
+             border-left: none;
+             border-top: none;
+         }
+
+         .amenity:hover .corner-decoration {
+             opacity: 1;
+             transform: scale(1.1);
+         }
+
+         .amenity-icon {
+             font-size: 3rem;
+             margin-bottom: 0.5rem;
+             display: block;
+             transition: all 0.3s ease;
+         }
+
+         .amenity:hover .amenity-icon {
+             transform: scale(1.1);
+         }
+         
+         .amenity h4 {
+             font-family: 'Playfair Display', serif;
+             font-size: 1.3rem;
+             font-weight: 700;
+             color: #222;
+             margin: 0 0 0.5rem 0;
+         }
+         
+         .amenity p {
+             color: #666;
+             line-height: 1.6;
+             margin: 0;
+             font-size: 1rem;
+         }
+
+        /* Footer */
+        .footer {
+            background: #222;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin: 0.5rem 0;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                height: 50vh;
+            }
+
+            .slide-content h1 {
+                font-size: 2.5rem;
+            }
+
+            /* Hide Dekorēšanas pakalpojumi slide on mobile */
+            .slide:nth-child(2) {
+                display: none;
+            }
+
+            .slide-content p {
+                font-size: 1.1rem;
+            }
+
+            .slider-arrow {
+                display: none;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .wedding-intro {
+                padding: 2rem 1rem;
+                margin-bottom: 2rem;
+                border-radius: 15px;
+            }
+
+            .intro-text {
+                font-size: 1.1rem;
+                padding: 1.5rem;
+            }
+
+
+
+            .features-list {
+                padding: 2rem 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .features-list h3 {
+                font-size: 1.3rem;
+            }
+
+            .features-list ul {
+                padding-left: 0;
+            }
+
+            .features-list li {
+                padding-left: 1rem;
+                font-size: 0.95rem;
+                padding: 0.8rem 0;
+                margin-bottom: 0.5rem;
+                line-height: 1.4;
+            }
+
+            .features-list li::before {
+                display: none;
+            }
+
+            .features-list li:hover {
+                padding-left: 1rem;
+                transform: none;
+            }
+
+            .intro-quote {
+                padding: 1.5rem;
+            }
+
+            .intro-quote p {
+                font-size: 1.1rem;
+            }
+
+            .availability-info {
+                padding: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            .availability-info p {
+                font-size: 0.95rem;
+            }
+
+            .availability-info p:first-child {
+                font-size: 1rem;
+            }
+
+            .availability-info::before,
+            .availability-info::after {
+                font-size: 1.5rem;
+            }
+
+                         .gallery-grid {
+                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                 gap: 1rem;
+             }
+
+             .gallery-image {
+                 height: 200px;
+             }
+
+             .reviews-grid {
+                 grid-template-columns: 1fr;
+                 gap: 1.5rem;
+             }
+
+             .review-card {
+                 padding: 2rem 1.5rem;
+             }
+
+             .review-content p {
+                 font-size: 1rem;
+             }
+
+             .review-stars {
+                 font-size: 1rem;
+             }
+
+             .wedding-gallery-section {
+                 padding: 3rem 0;
+             }
+
+             .gallery-subtitle {
+                 font-size: 1rem;
+                 margin-bottom: 2.5rem;
+             }
+
+             .wedding-gallery-container {
+                 padding: 0 1rem;
+             }
+
+             .wedding-gallery {
+                 display: flex;
+                 gap: 0;
+                 overflow-x: auto;
+                 scroll-behavior: smooth;
+                 scrollbar-width: none;
+                 -ms-overflow-style: none;
+                 padding: 0;
+                 scroll-snap-type: x mandatory;
+             }
+
+             .gallery-item {
+                 flex: 0 0 100%;
+                 width: 100%;
+                 height: 300px;
+                 min-width: 100%;
+                 scroll-snap-align: start;
+             }
+
+             .gallery-item.large {
+                 width: 100%;
+                 height: 300px;
+                 min-width: 100%;
+                 scroll-snap-align: start;
+             }
+
+             .gallery-arrow {
+                 display: flex;
+                 width: 40px;
+                 height: 40px;
+                 font-size: 1.5rem;
+             }
+
+             .wedding-gallery::-webkit-scrollbar {
+                 display: none;
+             }
+
+             .wedding-intro-section {
+                 padding: 3rem 0;
+             }
+
+             .wedding-intro-section .floating-decoration {
+                 font-size: 2rem;
+                 opacity: 0.05;
+             }
+
+             .wedding-intro {
+                 padding: 2rem 1.5rem;
+                 margin-bottom: 2rem;
+             }
+
+             .main-headline {
+                 font-size: 2rem;
+                 margin-bottom: 2rem;
+                 letter-spacing: 0.5px;
+                 line-height: 1.2;
+                 padding: 0 1rem;
+             }
+
+             .main-headline::before,
+             .main-headline::after {
+                 font-size: 1.4rem;
+                 margin: 0 0.5rem;
+             }
+
+             .wedding-intro .corner-decoration {
+                 width: 20px;
+                 height: 20px;
+                 border-width: 2px;
+             }
+
+             .intro-text {
+                 padding: 2rem 1.5rem;
+                 font-size: 1.2rem;
+             }
+
+             .intro-text::before,
+             .intro-text::after {
+                 font-size: 1.4rem;
+                 margin: 0 0.5rem;
+             }
+
+             .features-list {
+                 padding: 2rem 1.5rem;
+                 margin: 2rem 0;
+             }
+
+             .features-list h3::before {
+                 font-size: 1.5rem;
+                 top: -30px;
+             }
+
+             .availability-info {
+                 padding: 2rem 1.5rem;
+                 margin-top: 2rem;
+             }
+
+             .availability-info .corner-decoration {
+                 width: 15px;
+                 height: 15px;
+                 border-width: 1px;
+             }
+
+             .side-decoration {
+                 display: none;
+             }
+
+             .content-decoration {
+                 display: none;
+             }
+
+             .side-decoration {
+                 display: none;
+             }
+
+             .amenities-section {
+                 padding: 3rem 0;
+             }
+
+             .amenities-section .floating-decoration {
+                 font-size: 2rem;
+                 opacity: 0.05;
+             }
+
+             .amenities-section .container {
+                 padding: 0 2rem;
+             }
+
+             .amenities-section h2::before,
+             .amenities-section h2::after {
+                 font-size: 1.4rem;
+                 margin: 0 0.5rem;
+             }
+
+             .amenities-grid {
+                 gap: 1.5rem;
+             }
+
+             .amenity {
+                 padding: 2rem 1.5rem;
+             }
+
+             .amenity .corner-decoration {
+                 width: 15px;
+                 height: 15px;
+                 border-width: 1px;
+             }
+
+             .gallery-item.large {
+                 grid-column: span 2;
+                 grid-row: span 1;
+             }
+
+             .gallery-overlay {
+                 padding: 1.2rem;
+             }
+
+             .overlay-content h3 {
+                 font-size: 1.1rem;
+             }
+
+             .overlay-content p {
+                 font-size: 0.85rem;
+             }
+
+             .gallery-overlay {
+                 padding: 1.5rem 1rem 1rem;
+             }
+
+             .gallery-overlay h3 {
+                 font-size: 1.1rem;
+             }
+
+             .gallery-overlay p {
+                 font-size: 0.85rem;
+             }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .amenities-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .amenities-section {
+                padding: 2rem 0;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            /* Small mobile devices */
+            @media (max-width: 480px) {
+                .wedding-gallery {
+                    grid-template-columns: 1fr;
+                    grid-auto-rows: 200px;
+                    gap: 0.8rem;
+                }
+
+                .gallery-item.large {
+                    grid-column: span 1;
+                    grid-row: span 1;
+                }
+
+                .gallery-overlay {
+                    padding: 1rem;
+                }
+
+                .overlay-content h3 {
+                    font-size: 1.1rem;
+                }
+
+                .overlay-content p {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <img src="./Images/melns.png" alt="Viesu nams Ūdensdzirnavas logo" class="logo">
+            
+            <!-- Desktop Navigation -->
+            <nav class="nav-links">
+                <a href="index.html">Sākums</a>
+                <a href="index.html#par">Par mums</a>
+                <a href="index.html#pakalpojumi">Pakalpojumi</a>
+                <a href="index.html#kontakti">Kontakti</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="index.html">Sākums</a>
+            <a href="index.html#par">Par mums</a>
+            <a href="index.html#pakalpojumi">Pakalpojumi</a>
+            <a href="index.html#kontakti">Kontakti</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-slider">
+                         <div class="slide active kazas-slide" style="background-image: url('./Images/kazash.jpeg');">
+                 <div class="slide-content">
+                     <h1>Kāzas Ūdensdzirnavās</h1>
+                     <p>Vieta, kur sapņi pārtop par atmiņām. Mēs aicinām jūs svinēt savu īpašo dienu viesu namā, kur mierpilna daba, gaumīgi iekārtotas telpas un sirsnīga atmosfēra rada ideālu fonu neaizmirstamām kāzām.</p>
+                 </div>
+             </div>
+
+                         <div class="slide banketu-slide" style="background-image: url('./Images/bankets1.jpeg');">
+                 <div class="slide-content">
+                     <h1>Banketu zāles</h1>
+                     <p>Gaumīgi iekārtotas telpas jūsu īpašajai dienai</p>
+                 </div>
+             </div>
+            <div class="slide ceremonija-slide" style="background-image: url('./Images/ceremonija.jpg');">
+                <div class="slide-content">
+                    <h1>Ceremonijas dabā</h1>
+                    <p>Romantiskas ceremonijas ar skatu uz ezeru</p>
+                </div>
+            </div>
+        </div>
+        
+        <button class="slider-arrow prev">‹</button>
+        <button class="slider-arrow next">›</button>
+        
+        <div class="slider-nav">
+            <div class="slider-dot active"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-decoration top-left">🌸</div>
+        <div class="content-decoration top-right">🌺</div>
+        <div class="content-decoration bottom-left">🌷</div>
+        <div class="content-decoration bottom-right">🌼</div>
+        
+        <!-- Wedding Introduction -->
+        <section class="wedding-intro-section">
+                    <!-- Side Decorative Elements -->
+        <div class="side-decoration left">
+            <div class="decorative-element">💒</div>
+            <div class="decorative-element">🌹</div>
+            <div class="decorative-element">💍</div>
+            <div class="decorative-element">❦</div>
+            <div class="decorative-element">🏰</div>
+            <div class="decorative-element">💎</div>
+            <div class="decorative-element">🌺</div>
+            <div class="decorative-element">💫</div>
+        </div>
+        
+        <div class="side-decoration right">
+            <div class="decorative-element">💐</div>
+            <div class="decorative-element">✨</div>
+            <div class="decorative-element">💕</div>
+            <div class="decorative-element">🌸</div>
+            <div class="decorative-element">🌷</div>
+            <div class="decorative-element">🌼</div>
+            <div class="decorative-element">💝</div>
+            <div class="decorative-element">🌿</div>
+        </div>
+            
+            <div class="floating-decoration">💒</div>
+            <div class="floating-decoration">🌿</div>
+            <div class="floating-decoration">✨</div>
+            <div class="floating-decoration">💕</div>
+            <div class="wedding-intro">
+                <div class="corner-decoration top-left"></div>
+                <div class="corner-decoration top-right"></div>
+                <div class="corner-decoration bottom-left"></div>
+                <div class="corner-decoration bottom-right"></div>
+                                                  <h1 class="main-headline">KĀZAS MŪSU VIESU NAMĀ</h1>
+                  <div class="intro-content">
+                                           
+
+                     <div class="features-list">
+                         <h3>Piedāvājam:</h3>
+                         <ul>
+                             <li>Telpas līdz 100 viesiem – gan iekštelpās, gan brīvā dabā</li>
+                             <li>Plašas telpas kāzu ceremonijai un svinībām</li>
+                             <li>Skaista āra teritorija fotosesijām un svinīgai ceremonijai zem klajas debess</li>
+                             <li>Nakšņošanas iespējas viesiem un jaunajam pārim</li>
+                             <li>Banketu galdu klāšana sadarbībā ar uzticamiem pavāriem un dekoratoriem</li>
+                             <li>Dekorēšana un noformējums, pielāgots jūsu izvēlētajai tematikai</li>
+                             <li>Vieta muzikantiem, DJ un dejām</li>
+                             <li>Pirts un baseins vakara atslodzei un sarunām</li>
+                             <li>Autentisks manteļskurstenis viesu nama sirdī – ideāli vakara noskaņām un uguns rituāliem</li>
+                             <li>Plašs ezera krasts fotosesijām un atpūtai</li>
+                         </ul>
+                     </div>
+
+                     <div class="availability-info">
+                         <div class="corner-decoration top-left"></div>
+                         <div class="corner-decoration top-right"></div>
+                         <div class="corner-decoration bottom-left"></div>
+                         <div class="corner-decoration bottom-right"></div>
+                         <p>Mūsu pieredzējusī komanda palīdzēs gan ar plānošanu, gan ar detaļām, lai jūsu diena ritētu harmoniski.</p>
+                         <p>Rakstiet vai zvaniet, lai rezervētu apskates laiku un saņemtu individuālu piedāvājumu.</p>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Modal -->
+        <div id="galleryModal" class="gallery-modal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
+                <div class="modal-gallery">
+                    <!-- Kāzu dekorācijas modal items -->
+                    <div class="modal-gallery-item kazu-dekoracijas active">
+                        <img src="./Images/dekoracijas/IMG_9990.jpeg" alt="Kāzu dekorācijas">
+                        <div class="modal-item-info">
+                            <h3>Kāzu dekorācijas</h3>
+                            <p>Dekorēšanas pakalpojumi</p>
+                        </div>
+                    </div>
+                    <div class="modal-gallery-item ara-ceremonija">
+                        <img src="./Images/ceramonija/IMG_6486.jpeg" alt="Āra ceremonija">
+                        <div class="modal-item-info">
+                            <h3>Āra ceremonija</h3>
+                            <p>Brīnišķīga ceremonija</p>
+                        </div>
+                    </div>
+                    <div class="modal-gallery-item kazu-dekoracijas">
+                        <img src="./Images/dekoracijas/IMG_8412.jpeg" alt="Kāzu dekorācijas">
+                        <div class="modal-item-info">
+                            <h3>Kāzu dekorācijas</h3>
+                            <p>Romantiska atmosfēra</p>
+                        </div>
+                    </div>
+                    <div class="modal-gallery-item kazu-dekoracijas">
+                        <img src="./Images/dekoracijas/IMG_8347.jpeg" alt="Kāzu dekorācijas">
+                        <div class="modal-item-info">
+                            <h3>Kāzu dekorācijas</h3>
+                            <p>Skaisti noformējumi</p>
+                        </div>
+                    </div>
+                    <div class="modal-gallery-item kazu-dekoracijas">
+                        <img src="./Images/dekoracijas/IMG_7709.jpeg" alt="Kāzu dekorācijas">
+                        <div class="modal-item-info">
+                            <h3>Kāzu dekorācijas</h3>
+                            <p>Dekorēšanas pakalpojumi</p>
+                        </div>
+                    </div>
+                    <div class="modal-gallery-item kazu-dekoracijas">
+                        <img src="./Images/dekoracijas/IMG_7708.jpeg" alt="Kāzu dekorācijas">
+                        <div class="modal-item-info">
+                            <h3>Kāzu dekorācijas</h3>
+                            <p>Personalizēts noformējums</p>
+                        </div>
+                    </div>
+                    <div class="modal-gallery-item kazu-dekoracijas">
+                        <img src="./Images/dekoracijas/IMG_0554.jpeg" alt="Kāzu dekorācijas">
+                        <div class="modal-item-info">
+                            <h3>Kāzu dekorācijas</h3>
+                            <p>Gaumīga dekorēšana</p>
+                        </div>
+                    </div>
+                    <div class="modal-gallery-item kazu-dekoracijas">
+                        <img src="./Images/dekoracijas/IMG_0536_jpg.jpeg" alt="Kāzu dekorācijas">
+                        <div class="modal-item-info">
+                            <h3>Kāzu dekorācijas</h3>
+                            <p>Skaista ceremonija</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Bankets modal items -->
+                    <div class="modal-gallery-item bankets">
+                        <img src="./Images/bankets/ediens.jpeg" alt="Bankets">
+                        <div class="modal-item-info">
+                            <h3>Bankets</h3>
+                            <p>Gaumīgi pagatavoti ēdieni</p>
+                        </div>
+                    </div>
+
+                    
+                    
+                    <!-- Bērnu laukums modal items -->
+                    <div class="modal-gallery-item bernu-laukums">
+                        <img src="./Images/laukums/IMG_7978.jpeg" alt="Bērnu laukums">
+                        <div class="modal-item-info">
+                            <h3>Bērnu laukums</h3>
+                            <p>Skaista ceremonija</p>
+                        </div>
+                    </div>
+                    <div class="modal-gallery-item bernu-laukums">
+                        <img src="./Images/laukums/IMG_7975.jpeg" alt="Bērnu laukums">
+                        <div class="modal-item-info">
+                            <h3>Bērnu laukums</h3>
+                            <p>Romantiska ceremonija</p>
+                        </div>
+                    </div>
+                    <div class="modal-gallery-item bernu-laukums">
+                        <img src="./Images/laukums/IMG_7965_jpg.jpeg" alt="Bērnu laukums">
+                        <div class="modal-item-info">
+                            <h3>Bērnu laukums</h3>
+                            <p>Brīnišķīga ceremonija dabā</p>
+                        </div>
+                    </div>
+                    <div class="modal-gallery-item bankets">
+                        <img src="./Images/bankets/ediens4.jpg" alt="Bankets">
+                        <div class="modal-item-info">
+                            <h3>Bankets</h3>
+                            <p>Gaumīgi iekārtotas banketu zāles</p>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                <div class="modal-navigation">
+                    <button class="modal-nav-btn modal-prev">‹</button>
+                    <div class="modal-dots"></div>
+                    <button class="modal-nav-btn modal-next">›</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <section>
+            <h2 class="section-title">Viesu Atsauksmes</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-stars">★★★★★</div>
+                        <div class="review-date">2024. gada augusts</div>
+                    </div>
+                    <div class="review-content">
+                        <p>"Neaizmirstamas kāzas! Viesu nams "Ūdensdzirnavas" pārpildīja visas mūsu cerības. Skaistā daba, gaumīgas telpas un ļoti uzmanīgs personāls. Mūsu viesi joprojām runā par to, cik brīnišķīga bija atmosfēra."</p>
+                    </div>
+                    <div class="review-author">
+                        <div class="author-info">
+                            <h4>Anna un Māris</h4>
+                            <span>Kāzu pāris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-stars">★★★★★</div>
+                        <div class="review-date">2024. gada jūnijs</div>
+                    </div>
+                    <div class="review-content">
+                        <p>"Izvēlējāmies šo vietu savām kāzām un nebijām viltus. Romantiska ceremonija dabā ar skatu uz ezeru, un tad brīnišķīga banketu zāle. Personāls palīdzēja ar visām detaļām un radīja īpašu atmosfēru."</p>
+                    </div>
+                    <div class="review-author">
+                        <div class="author-info">
+                            <h4>Līga un Jānis</h4>
+                            <span>Kāzu pāris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-stars">★★★★★</div>
+                        <div class="review-date">2024. gada septembris</div>
+                    </div>
+                    <div class="review-content">
+                        <p>"Perfekta vieta mūsu kāzām! Skaistā daba, kvalitatīvi pakalpojumi un ļoti elastīga pieeja. Mūsu viesi bija sajūsmā no vietas un atmosfēras. Noteikti ieteiktu citiem pāriem!"</p>
+                    </div>
+                    <div class="review-author">
+                        <div class="author-info">
+                            <h4>Elīna un Roberts</h4>
+                            <span>Kāzu pāris</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <!-- Wedding Gallery Section -->
+        <section class="wedding-gallery-section">
+            <div class="floating-decoration">💐</div>
+            <div class="floating-decoration">🌹</div>
+            <div class="floating-decoration">✨</div>
+            <div class="floating-decoration">💕</div>
+            <h2 class="section-title">Kāzu Galerija</h2>
+            <p class="gallery-subtitle">Sapņu kāzas, kas pārtapa par skaistām atmiņām</p>
+            
+            <div class="wedding-gallery-container">
+                <div class="wedding-gallery">
+                    <!-- Kāzu dekorācijas section -->
+                    <div class="gallery-item large">
+                        <div class="corner-decoration top-left"></div>
+                        <div class="corner-decoration top-right"></div>
+                        <div class="corner-decoration bottom-left"></div>
+                        <div class="corner-decoration bottom-right"></div>
+                        <img src="./Images/dekoracijas/IMG_9990.jpeg" alt="Kāzu dekorācijas" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <h3>Kāzu dekorācijas</h3>
+                                <p>Dekorēšanas pakalpojumi</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <div class="corner-decoration top-left"></div>
+                        <div class="corner-decoration top-right"></div>
+                        <div class="corner-decoration bottom-left"></div>
+                        <div class="corner-decoration bottom-right"></div>
+                        <img src="./Images/ceramonija/IMG_6486.jpeg" alt="Āra ceremonija" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <h3>Āra ceremonija</h3>
+                                <p>Brīnišķīga ceremonija</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bankets section -->
+                    <div class="gallery-item">
+                        <div class="corner-decoration top-left"></div>
+                        <div class="corner-decoration top-right"></div>
+                        <div class="corner-decoration bottom-left"></div>
+                        <div class="corner-decoration bottom-right"></div>
+                        <img src="./Images/bankets/ediens.jpeg" alt="Bankets" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <h3>Bankets</h3>
+                                <p>Gaumīgi pagatavoti ēdieni</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    
+                                        <!-- Bērnu laukums section -->
+                    <div class="gallery-item large">
+                        <div class="corner-decoration top-left" style="opacity: 1;"></div>
+                        <div class="corner-decoration top-right" style="opacity: 1;"></div>
+                        <div class="corner-decoration bottom-left" style="opacity: 1;"></div>
+                        <div class="corner-decoration bottom-right" style="opacity: 1;"></div>
+                        <img src="./Images/laukums/IMG_7978.jpeg" alt="Bērnu laukums" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <h3>Bērnu laukums</h3>
+                                <p>Skaista ceremonija</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom decorative border -->
+            <div class="gallery-bottom-decoration">
+                <div class="decoration-line"></div>
+                <div class="decoration-symbol">❦</div>
+                <div class="decoration-line"></div>
+            </div>
+        </section>
+
+        
+    </main>
+
+         <!-- Amenities Section -->
+     <section id="amenities" class="amenities-section">
+         <div class="container">
+             <h2>Ērtības</h2>
+             <div class="amenities-grid">
+                 <div class="amenity">
+                     <div class="corner-decoration top-left"></div>
+                     <div class="corner-decoration top-right"></div>
+                     <div class="corner-decoration bottom-left"></div>
+                     <div class="corner-decoration bottom-right"></div>
+                     <span class="amenity-icon">🅿️</span>
+                     <h4>Bezmaksas Parkinga</h4>
+                     <p>Ērts parkinga vietas pieejams visiem viesiem un pasākumu dalībniekiem</p>
+                 </div>
+                 
+                 <div class="amenity">
+                     <div class="corner-decoration top-left"></div>
+                     <div class="corner-decoration top-right"></div>
+                     <div class="corner-decoration bottom-left"></div>
+                     <div class="corner-decoration bottom-right"></div>
+                     <span class="amenity-icon">📶</span>
+                     <h4>Bezmaksas Wi-Fi</h4>
+                     <p>Ātrs internets visā telpā nepārtrauktai savienojamībai</p>
+                 </div>
+                 
+                 <div class="amenity">
+                     <div class="corner-decoration top-left"></div>
+                     <div class="corner-decoration top-right"></div>
+                     <div class="corner-decoration bottom-left"></div>
+                     <div class="corner-decoration bottom-right"></div>
+                     <span class="amenity-icon">🌿</span>
+                     <h4>Apkārtne</h4>
+                     <p>Skaistas āra telpas ideālas ceremonijām un foto sesijām</p>
+                 </div>
+                 
+                 <div class="amenity">
+                     <div class="corner-decoration top-left"></div>
+                     <div class="corner-decoration top-right"></div>
+                     <div class="corner-decoration bottom-left"></div>
+                     <div class="corner-decoration bottom-right"></div>
+                     <span class="amenity-icon">☕</span>
+                     <h4>Ēdināšanas Pakalpojumi</h4>
+                     <p>Profesionāli ēdināšanas pakalpojumi visiem pasākumu veidiem</p>
+                 </div>
+             </div>
+         </div>
+     </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Galvenās Lapas</h3>
+                <ul>
+                    <li><a href="index.html">Sākums</a></li>
+                    <li><a href="telpuire.html">Telpu īre</a></li>
+                    <li><a href="kazu-zale.html">Kāzas</a></li>
+                    <li><a href="naktsmitnes.html">Naktsmītnes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informācija</h3>
+                <ul>
+                    <li><a href="#">Par mums</a></li>
+                    <li><a href="#">Kontakti</a></li>
+                    <li><a href="#">Rezervācija</a></li>
+                    <li><a href="#">Noteikumi</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Kontakti</h3>
+                <ul>
+                    <li>📞 +371 20000000</li>
+                    <li>📧 info@udensdzirnavas.lv</li>
+                    <li>📍 Latvija, Rīgas novads</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Viesu nams "Ūdensdzirnavas". Visas tiesības aizsargātas.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.remove('active');
+            });
+        });
+
+        // Hero slider functionality
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevBtn = document.querySelector('.slider-arrow.prev');
+        const nextBtn = document.querySelector('.slider-arrow.next');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Auto-slide
+        setInterval(nextSlide, 5000);
+
+        // Navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Touch/swipe support
+        let startX = 0;
+        let endX = 0;
+
+        document.querySelector('.hero-slider').addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        document.querySelector('.hero-slider').addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            if (startX - endX > 50) {
+                nextSlide();
+            } else if (endX - startX > 50) {
+                prevSlide();
+            }
+        });
+
+        // Wedding Gallery Slider functionality
+        const galleryContainer = document.querySelector('.wedding-gallery');
+        const leftArrow = document.querySelector('.gallery-arrow-left');
+        const rightArrow = document.querySelector('.gallery-arrow-right');
+        const scrollAmount = 400; // Adjust based on your needs
+
+        if (leftArrow && rightArrow && galleryContainer) {
+            leftArrow.addEventListener('click', () => {
+                galleryContainer.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+
+            rightArrow.addEventListener('click', () => {
+                galleryContainer.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Hide/show arrows based on scroll position
+            galleryContainer.addEventListener('scroll', () => {
+                const isAtStart = galleryContainer.scrollLeft === 0;
+                const isAtEnd = galleryContainer.scrollLeft + galleryContainer.clientWidth >= galleryContainer.scrollWidth;
+
+                leftArrow.style.opacity = isAtStart ? '0.5' : '1';
+                rightArrow.style.opacity = isAtEnd ? '0.5' : '1';
+                leftArrow.style.pointerEvents = isAtStart ? 'none' : 'auto';
+                rightArrow.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+            });
+
+            // Initialize arrow states
+            galleryContainer.dispatchEvent(new Event('scroll'));
+        }
+
+        // Gallery Modal functionality
+        const modal = document.getElementById('galleryModal');
+        const modalItems = document.querySelectorAll('.modal-gallery-item');
+        const modalDots = document.querySelector('.modal-dots');
+        const modalPrev = document.querySelector('.modal-prev');
+        const modalNext = document.querySelector('.modal-next');
+        const modalClose = document.querySelector('.modal-close');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        let currentModalIndex = 0;
+        let currentModalCategory = '';
+
+        // Create dots for modal navigation
+        function createModalDots(category) {
+            modalDots.innerHTML = '';
+            const categoryItems = document.querySelectorAll(`.modal-gallery-item.${category}`);
+            categoryItems.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'modal-dot';
+            if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => showModalItem(index, category));
+            modalDots.appendChild(dot);
+        });
+        }
+
+        // Show modal item
+        function showModalItem(index, category) {
+            // Hide all modal items
+            modalItems.forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.modal-dot').forEach(dot => dot.classList.remove('active'));
+            
+            // Show only items from the current category
+            const categoryItems = document.querySelectorAll(`.modal-gallery-item.${category}`);
+            if (categoryItems[index]) {
+                categoryItems[index].classList.add('active');
+            document.querySelectorAll('.modal-dot')[index].classList.add('active');
+            currentModalIndex = index;
+                currentModalCategory = category;
+            }
+        }
+
+        // Open modal when gallery item is clicked
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                modal.classList.add('active');
+                
+                // Determine which category this item belongs to
+                const itemTitle = item.querySelector('h3').textContent;
+                let category = '';
+                
+                if (itemTitle === 'Kāzu dekorācijas') {
+                    category = 'kazu-dekoracijas';
+                } else if (itemTitle === 'Bankets') {
+                    category = 'bankets';
+                } else if (itemTitle === 'Bērnu laukums') {
+                    category = 'bernu-laukums';
+                } else {
+                    // For other categories, show all items (fallback)
+                    category = 'all';
+                }
+                
+                if (category !== 'all') {
+                    // Show only items from the selected category
+                    modalItems.forEach(item => item.classList.remove('active'));
+                    const categoryItems = document.querySelectorAll(`.modal-gallery-item.${category}`);
+                    if (categoryItems[0]) {
+                        categoryItems[0].classList.add('active');
+                        createModalDots(category);
+                        currentModalIndex = 0;
+                        currentModalCategory = category;
+                    }
+                } else {
+                    // Show all items for other categories
+                    showModalItem(index, 'all');
+                }
+                
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close modal
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking overlay
+        modal.querySelector('.modal-overlay').addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Modal navigation
+        modalPrev.addEventListener('click', () => {
+            if (currentModalCategory && currentModalCategory !== 'all') {
+                const categoryItems = document.querySelectorAll(`.modal-gallery-item.${currentModalCategory}`);
+                const newIndex = (currentModalIndex - 1 + categoryItems.length) % categoryItems.length;
+                showModalItem(newIndex, currentModalCategory);
+            } else {
+            const newIndex = (currentModalIndex - 1 + modalItems.length) % modalItems.length;
+                showModalItem(newIndex, 'all');
+            }
+        });
+
+        modalNext.addEventListener('click', () => {
+            if (currentModalCategory && currentModalCategory !== 'all') {
+                const categoryItems = document.querySelectorAll(`.modal-gallery-item.${currentModalCategory}`);
+                const newIndex = (currentModalIndex + 1) % categoryItems.length;
+                showModalItem(newIndex, currentModalCategory);
+            } else {
+            const newIndex = (currentModalIndex + 1) % modalItems.length;
+                showModalItem(newIndex, 'all');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!modal.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            } else if (e.key === 'ArrowLeft') {
+                modalPrev.click();
+            } else if (e.key === 'ArrowRight') {
+                modalNext.click();
+            }
+        });
+    </script>
+</body>
+</html> 

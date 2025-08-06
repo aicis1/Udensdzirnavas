@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Īpašuma Apraksts - Viesu nams "Ūdensdzirnavas"</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --white: #f3f3f3;
+            --overlay-dark: rgba(34, 34, 34, 0.55);
+            --overlay-gradient: linear-gradient(180deg, rgba(34,34,34,0.55) 60%, rgba(34,34,34,0.85) 100%);
+            --headline-size: 3.5rem;
+            --subheadline-size: 1.35rem;
+            --button-radius: 999px;
+            --button-padding: 0.9em 2.2em;
+            --transition: 0.25s cubic-bezier(.4,0,.2,1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            background: #FAF0E6;
+            color: #222;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: #FAF0E6;
+            box-shadow: 0 2px 16px rgba(34,34,34,0.13);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #222;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #222;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--gold);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #FAF0E6;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-top: 1px solid #e0e0e0;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 2rem;
+            color: #222;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            background-color: #f0e6d6;
+            color: var(--gold);
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #222;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+                 /* Photos Section */
+         .photos-section {
+             margin-bottom: 4rem;
+         }
+
+                   .photos-grid {
+              display: grid;
+              grid-template-columns: 2fr 1fr;
+              grid-template-rows: 1fr 1fr;
+              gap: 1rem;
+              margin-bottom: 2rem;
+              height: 500px;
+          }
+
+          .photo-item {
+              position: relative;
+              border-radius: 15px;
+              overflow: hidden;
+              box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+              cursor: pointer;
+          }
+
+          .photo-item.featured {
+              grid-column: 1;
+              grid-row: 1 / 3;
+          }
+
+          .photo-item.small {
+              grid-column: 2;
+              grid-row: 1;
+          }
+
+          .photo-item.small:nth-child(3) {
+              grid-column: 2;
+              grid-row: 2;
+          }
+
+          .photo-item.small:nth-child(4) {
+              display: none;
+          }
+
+          .photo-item.small:nth-child(5) {
+              display: none;
+          }
+
+          .photo-item.small:nth-child(6) {
+              display: none;
+          }
+
+          .see-all-photos {
+              text-align: center;
+              margin-top: 1rem;
+          }
+
+          .see-all-btn {
+              background: var(--gold);
+              color: white;
+              border: none;
+              padding: 0.8rem 2rem;
+              border-radius: 10px;
+              font-size: 1rem;
+              font-weight: 600;
+              cursor: pointer;
+              transition: background-color 0.3s ease;
+          }
+
+          .see-all-btn:hover {
+              background: #c19b2e;
+          }
+
+         .photo-item:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+         }
+
+         .photo-item img {
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
+             object-position: center bottom;
+             transition: transform 0.3s ease;
+         }
+
+         .photo-item:hover img {
+             transform: scale(1.05);
+         }
+
+        /* Modal for photo preview */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+                 .close {
+             position: absolute;
+             top: 15px;
+             right: 35px;
+             color: #f1f1f1;
+             font-size: 40px;
+             font-weight: bold;
+             cursor: pointer;
+             z-index: 2001;
+         }
+
+         .modal-nav {
+             position: absolute;
+             top: 50%;
+             transform: translateY(-50%);
+             background: rgba(255, 255, 255, 0.2);
+             border: none;
+             color: white;
+             font-size: 2rem;
+             padding: 1rem;
+             cursor: pointer;
+             transition: background 0.3s ease;
+             z-index: 2001;
+         }
+
+         .modal-nav:hover {
+             background: rgba(255, 255, 255, 0.3);
+         }
+
+         .modal-nav.prev {
+             left: 20px;
+         }
+
+         .modal-nav.next {
+             right: 20px;
+         }
+
+         .modal-info {
+             position: absolute;
+             bottom: 20px;
+             left: 50%;
+             transform: translateX(-50%);
+             color: white;
+             font-size: 1.1rem;
+             z-index: 2001;
+         }
+
+                 /* Reviews Section */
+         .reviews-section {
+             background: white;
+             border-radius: 20px;
+             padding: 3rem;
+             margin-bottom: 4rem;
+             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+             border: 1px solid #e8e8e8;
+         }
+
+         .reviews-section h2 {
+             text-align: center;
+             font-family: 'Merriweather', serif;
+             font-size: 2.5rem;
+             font-weight: 700;
+             color: var(--gold);
+             margin-bottom: 50px;
+             position: relative;
+         }
+
+         .star-decoration {
+             color: var(--gold);
+             font-size: 2rem;
+             margin: 0 15px;
+             display: inline-block;
+             animation: star-glow 2s ease-in-out infinite alternate;
+         }
+
+         @media (max-width: 768px) {
+             .star-decoration {
+                 display: none;
+             }
+         }
+
+         .star-decoration:first-child {
+             animation-delay: 0s;
+         }
+
+         .star-decoration:last-child {
+             animation-delay: 1s;
+         }
+
+         @keyframes star-glow {
+             0% {
+                 transform: scale(1) rotate(0deg);
+                 filter: drop-shadow(0 0 5px var(--gold));
+             }
+             100% {
+                 transform: scale(1.1) rotate(5deg);
+                 filter: drop-shadow(0 0 15px var(--gold));
+             }
+         }
+
+         .reviews-wrapper {
+             position: relative;
+             max-width: 1050px;
+             margin: 0 auto;
+             overflow: hidden;
+         }
+
+         .reviews-wrapper::before,
+         .reviews-wrapper::after {
+             content: '';
+             position: absolute;
+             top: 0;
+             bottom: 0;
+             width: 150px;
+             z-index: 5;
+             pointer-events: none;
+         }
+
+         .reviews-wrapper::before {
+             left: 0;
+             background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0.8) 20%, rgba(255, 255, 255, 0.4) 60%, transparent 100%);
+         }
+
+         .reviews-wrapper::after {
+             right: 0;
+             background: linear-gradient(to left, white 0%, rgba(255, 255, 255, 0.8) 20%, rgba(255, 255, 255, 0.4) 60%, transparent 100%);
+         }
+
+         .reviews-slider {
+             display: flex;
+             overflow-x: auto;
+             scroll-snap-type: x mandatory;
+             scrollbar-width: none;
+             -ms-overflow-style: none;
+             gap: 30px;
+             padding: 20px 0;
+             justify-content: center;
+         }
+
+         .reviews-slider::-webkit-scrollbar {
+             display: none;
+         }
+
+         .review-card {
+             min-width: 315px;
+             max-width: 374px;
+             background: #f7f5ed;
+             border-radius: 16px;
+             box-shadow: 0 4px 16px rgba(212, 175, 55, 0.08);
+             border: 1.5px solid #e2d7b7;
+             scroll-snap-align: center;
+             text-align: center;
+             transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+             color: #222;
+             flex-shrink: 0;
+             padding: 34px;
+         }
+
+         @media (max-width: 1260px) {
+             .review-card {
+                 min-width: 272px;
+                 max-width: 314px;
+                 padding: 25px;
+             }
+         }
+
+         @media (max-width: 900px) {
+             .review-card {
+                 min-width: 221px;
+                 max-width: 272px;
+                 padding: 17px;
+             }
+         }
+
+         .review-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 8px 32px rgba(212, 175, 55, 0.18);
+             border-color: #d4af37;
+         }
+
+         .review-card p {
+             font-size: 1.1rem;
+             line-height: 1.6;
+             color: #222;
+             margin-bottom: 20px;
+             font-style: italic;
+         }
+
+         .review-card .stars {
+             font-size: 1.2rem;
+             margin-bottom: 15px;
+         }
+
+         .review-card .review-author {
+             font-weight: 600;
+             color: #222;
+             font-size: 1rem;
+         }
+
+         .review-arrow {
+             position: absolute;
+             top: 50%;
+             transform: translateY(-50%);
+             width: 50px;
+             height: 50px;
+             background: var(--gold);
+             color: white;
+             border: none;
+             border-radius: 50%;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             font-size: 1.5rem;
+             cursor: pointer;
+             transition: all 0.3s ease;
+             z-index: 10;
+             box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+         }
+
+         .review-arrow:hover {
+             background: #b8941f;
+             transform: translateY(-50%) scale(1.1);
+             box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+         }
+
+         .review-arrow.left {
+             left: -60px;
+         }
+
+         .review-arrow.right {
+             right: -60px;
+         }
+
+         .review-arrow.disabled {
+             opacity: 0.5;
+             cursor: not-allowed;
+             pointer-events: none;
+         }
+
+        /* House Rules Section */
+        .rules-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #e8e8e8;
+        }
+
+        .rules-category {
+            margin-bottom: 3rem;
+        }
+
+        .rules-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .rules-list {
+            list-style: none;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .rule-item:last-child {
+            border-bottom: none;
+        }
+
+        .rule-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+            color: var(--gold);
+            min-width: 30px;
+        }
+
+        .rule-content h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 0.5rem;
+        }
+
+        .rule-content p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: #222;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin: 0.5rem 0;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+                         /* Tablet Layout */
+             .photos-grid {
+                 grid-template-columns: 1fr 1fr;
+                 grid-template-rows: 1fr 1fr;
+                 height: 400px;
+                 gap: 1rem;
+             }
+
+             .photo-item.featured {
+                 grid-column: 1;
+                 grid-row: 1 / 3;
+             }
+
+             .photo-item.small {
+                 grid-column: 2;
+                 height: auto;
+             }
+
+             .photo-item.small:nth-child(3) {
+                 grid-column: 2;
+                 grid-row: 2;
+             }
+
+             .photo-item.small:nth-child(4),
+             .photo-item.small:nth-child(5),
+             .photo-item.small:nth-child(6) {
+                 display: none;
+             }
+
+             /* Mobile Layout */
+             @media (max-width: 480px) {
+                 .photos-grid {
+                     grid-template-columns: 1fr;
+                     grid-template-rows: auto;
+                     height: auto;
+                     gap: 1rem;
+                 }
+
+                 .photo-item.featured {
+                     grid-column: 1;
+                     grid-row: 1;
+                     height: 250px;
+                 }
+
+                 .photo-item.small {
+                     grid-column: 1;
+                     height: 150px;
+                 }
+
+                 .photo-item.small:nth-child(3) {
+                     grid-column: 1;
+                     grid-row: 3;
+                 }
+
+                 .photo-item.small:nth-child(4) {
+                     display: block;
+                     grid-column: 1;
+                     grid-row: 4;
+                     height: 150px;
+                 }
+
+                 .photo-item.small:nth-child(5) {
+                     display: block;
+                     grid-column: 1;
+                     grid-row: 5;
+                     height: 150px;
+                 }
+
+                 .photo-item.small:nth-child(6) {
+                     display: block;
+                     grid-column: 1;
+                     grid-row: 6;
+                     height: 150px;
+                 }
+             }
+
+                         .reviews-section {
+                 padding: 2rem 1rem;
+             }
+
+             .reviews-section h2 {
+                 font-size: 2rem;
+                 margin-bottom: 20px;
+             }
+
+             .review-arrow {
+                 display: none;
+             }
+
+             .reviews-wrapper {
+                 max-width: 900px;
+             }
+
+             .reviews-wrapper::before,
+             .reviews-wrapper::after {
+                 width: 80px;
+             }
+
+             .review-card {
+                 min-width: 280px;
+                 padding: 25px;
+             }
+
+             .reviews-slider {
+                 justify-content: center;
+                 padding: 20px 10px;
+             }
+
+             .rules-section {
+                 padding: 2rem 1rem;
+             }
+
+            .category-title {
+                font-size: 1.5rem;
+            }
+
+            .rule-item {
+                padding: 1rem 0;
+            }
+
+                         .footer-content {
+                 grid-template-columns: 1fr;
+                 text-align: center;
+             }
+
+             /* Mobile responsive for reviews */
+             @media (max-width: 480px) {
+                 .reviews-section {
+                     padding: 1rem;
+                 }
+
+                 .reviews-wrapper {
+                     max-width: 800px;
+                 }
+
+                 .reviews-wrapper::before,
+                 .reviews-wrapper::after {
+                     width: 60px;
+                 }
+
+                 .review-card {
+                     min-width: 260px;
+                     padding: 20px;
+                 }
+
+                 .review-card p {
+                     font-size: 1rem;
+                 }
+
+                 .reviews-slider {
+                     justify-content: center;
+                     padding: 20px 5px;
+                     gap: 20px;
+                 }
+             }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <img src="./Images/melns.png" alt="Viesu nams Ūdensdzirnavas logo" class="logo">
+            
+            <!-- Desktop Navigation -->
+            <nav class="nav-links">
+                <a href="index.html">Sākums</a>
+                <a href="index.html#par">Par mums</a>
+                <a href="index.html#pakalpojumi">Pakalpojumi</a>
+                <a href="index.html#kontakti">Kontakti</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="index.html">Sākums</a>
+            <a href="index.html#par">Par mums</a>
+            <a href="index.html#pakalpojumi">Pakalpojumi</a>
+            <a href="index.html#kontakti">Kontakti</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Photos Section -->
+        <section class="photos-section">
+            <h2 class="section-title">📸 Foto Galerija</h2>
+                         <div class="photos-grid">
+                 <div class="photo-item featured" onclick="openModal('./Images/prieksa.jpg')">
+                     <img src="./Images/prieksa.jpg" alt="Viesu nama priekšpuse">
+                 </div>
+                 <div class="photo-item small" onclick="openModal('./Images/bankets.jpg')">
+                     <img src="./Images/bankets.jpg" alt="Banketu zāle">
+                 </div>
+                 <div class="photo-item small" onclick="openModal('./Images/prieksadaba.jpg')">
+                     <img src="./Images/prieksadaba.jpg" alt="Āra teritorija">
+                 </div>
+                 <div class="photo-item small" onclick="openModal('./Images/1istaba.jpg')">
+                     <img src="./Images/1istaba.jpg" alt="Iekštelpas">
+                 </div>
+                 <div class="photo-item small" onclick="openModal('./Images/pelde.jpeg')">
+                     <img src="./Images/pelde.jpeg" alt="Baseins">
+                 </div>
+                 <div class="photo-item small" onclick="openModal('./Images/pirts.jpeg')">
+                     <img src="./Images/pirts.jpeg" alt="Pirts">
+                 </div>
+             </div>
+             <div class="see-all-photos">
+                 <button class="see-all-btn" onclick="openAllPhotos()">Skatīt visas fotogrāfijas</button>
+             </div>
+        </section>
+
+                 <!-- Reviews Section -->
+         <section class="reviews-section">
+             <h2><span class="star-decoration">⭐</span> APMEKLĒTĀJU ATSAUKSMES <span class="star-decoration">⭐</span></h2>
+             <div class="reviews-wrapper">
+                 <div class="reviews-slider" id="reviews-slider">
+                     <div class="review-card">
+                         <p>"Brīnišķīga vieta atpūtai ar ģimeni. Miers, daba un siltums."</p>
+                         <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+                         <span class="review-author">— Inga L.</span>
+                     </div>
+                     <div class="review-card">
+                         <p>"Perfekta vieta kāzām! Romantiska atmosfēra un brīnišķīgi pakalpojumi."</p>
+                         <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+                         <span class="review-author">— Māris un Anna</span>
+                     </div>
+                     <div class="review-card">
+                         <p>"Atgriezīšos noteikti! Skaisti numuri, garšīga ēdiena un draudzīgs personāls."</p>
+                         <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+                         <span class="review-author">— Jānis K.</span>
+                     </div>
+                     <div class="review-card">
+                         <p>"Daugavas skats ir neaizmirstams. Ideāli vieta romantiskai atpūtai."</p>
+                         <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+                         <span class="review-author">— Elīna un Pēteris</span>
+                     </div>
+                     <div class="review-card">
+                         <p>"Ģimenes brīvdienas bija fantastiskas. Bērniem ļoti patika daba un telpas."</p>
+                         <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+                         <span class="review-author">— Kristīne un Andris</span>
+                     </div>
+                     <div class="review-card">
+                         <p>"Kāzām! Romantiska atmosfēra un brīnišķīgi pakalpojumi."</p>
+                         <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+                         <span class="review-author">— Imants Z</span>
+                     </div>
+                     <div class="review-card">
+                         <p>"Fantastiska vieta! Daba, interjers, ēdiens, apkalpošana, viss brīnišķīgi. Noteikti atgriezīsimies vēl."</p>
+                         <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+                         <span class="review-author">— Jānis B.</span>
+                     </div>
+                     <div class="review-card">
+                         <p>"Skaista, sakopta vieta, atsaucīga, laipna nama māte. Vieta, kur veltīt laiku atpūtai."</p>
+                         <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+                         <span class="review-author">— Oskars A</span>
+                     </div>
+                 </div>
+                 <div class="review-arrow left" id="review-left">←</div>
+                 <div class="review-arrow right" id="review-right">→</div>
+             </div>
+         </section>
+
+        <!-- House Rules Section -->
+        <section class="rules-section">
+            <h2 class="section-title">📋 Mājas Noteikumi</h2>
+            
+            <div class="rules-category">
+                <h3 class="category-title">Iebraukšana un Izbraukšana</h3>
+                <ul class="rules-list">
+                    <li class="rule-item">
+                        <span class="rule-icon">🕐</span>
+                        <div class="rule-content">
+                            <h4>Iebraukšanas laiks</h4>
+                            <p>Iebraukšana no 15:00, izbraukšana līdz 11:00</p>
+                        </div>
+                    </li>
+                    <li class="rule-item">
+                        <span class="rule-icon">🔑</span>
+                        <div class="rule-content">
+                            <h4>Atslēgu saņemšana</h4>
+                            <p>Atslēgas saņemamas pie saimnieka vai kodārotais</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="rules-category">
+                <h3 class="category-title">Dzīvnieki</h3>
+                <ul class="rules-list">
+                    <li class="rule-item">
+                        <span class="rule-icon">🐕</span>
+                        <div class="rule-content">
+                            <h4>Suņi atļauti</h4>
+                            <p>Suņi ir atļauti ar iepriekšēju paziņojumu, maksa €15 par nakti</p>
+                        </div>
+                    </li>
+                    <li class="rule-item">
+                        <span class="rule-icon">🚫</span>
+                        <div class="rule-content">
+                            <h4>Kaķi nav atļauti</h4>
+                            <p>Kaķi nav atļauti alergiju dēļ</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="rules-category">
+                <h3 class="category-title">Kājāmgājēji</h3>
+                <ul class="rules-list">
+                    <li class="rule-item">
+                        <span class="rule-icon">👥</span>
+                        <div class="rule-content">
+                            <h4>Viesu skaits</h4>
+                            <p>Maksimālais viesu skaits istabā - 4 personas</p>
+                        </div>
+                    </li>
+                    <li class="rule-item">
+                        <span class="rule-icon">🎉</span>
+                        <div class="rule-content">
+                            <h4>Pasākumi</h4>
+                            <p>Pasākumi ir atļauti tikai ar iepriekšēju paziņojumu</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="rules-category">
+                <h3 class="category-title">Kāpņu un Telpu Izmantošana</h3>
+                <ul class="rules-list">
+                    <li class="rule-item">
+                        <span class="rule-icon">🚭</span>
+                        <div class="rule-content">
+                            <h4>Smēķēšana</h4>
+                            <p>Smēķēšana ir aizliegta iekštelpās, atļauta tikai ārā</p>
+                        </div>
+                    </li>
+                    <li class="rule-item">
+                        <span class="rule-icon">🔇</span>
+                        <div class="rule-content">
+                            <h4>Klusums</h4>
+                            <p>Klusuma režīms no 22:00 līdz 8:00</p>
+                        </div>
+                    </li>
+                    <li class="rule-item">
+                        <span class="rule-icon">🧹</span>
+                        <div class="rule-content">
+                            <h4>Tīrīšana</h4>
+                            <p>Telpu tīrīšana notiek katru dienu no 10:00 līdz 12:00</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+         <!-- Photo Modal -->
+     <div id="photoModal" class="modal">
+         <span class="close" onclick="closeModal()">&times;</span>
+         <button class="modal-nav prev" onclick="changePhoto(-1)">‹</button>
+         <button class="modal-nav next" onclick="changePhoto(1)">›</button>
+         <div class="modal-content">
+             <img id="modalImage" src="" alt="Photo preview">
+         </div>
+         <div class="modal-info">
+             <span id="photoCounter">1 / 6</span>
+         </div>
+     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Galvenās Lapas</h3>
+                <ul>
+                    <li><a href="index.html">Sākums</a></li>
+                    <li><a href="telpuire.html">Telpu īre</a></li>
+                    <li><a href="kazu-zale.html">Kāzas</a></li>
+                    <li><a href="naktsmitnes.html">Naktsmītnes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informācija</h3>
+                <ul>
+                    <li><a href="#">Par mums</a></li>
+                    <li><a href="#">Kontakti</a></li>
+                    <li><a href="#">Rezervācija</a></li>
+                    <li><a href="#">Noteikumi</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Kontakti</h3>
+                <ul>
+                    <li>📞 +371 20000000</li>
+                    <li>📧 info@udensdzirnavas.lv</li>
+                    <li>📍 Latvija, Rīgas novads</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Viesu nams "Ūdensdzirnavas". Visas tiesības aizsargātas.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('active');
+        }
+
+                 // Photo modal functionality
+         const photos = [
+             './Images/prieksa.jpg',
+             './Images/bankets.jpg',
+             './Images/prieksadaba.jpg',
+             './Images/1istaba.jpg',
+             './Images/pelde.jpeg',
+             './Images/pirts.jpeg'
+         ];
+         let currentPhotoIndex = 0;
+
+         function openModal(imageSrc) {
+             const modal = document.getElementById('photoModal');
+             const modalImg = document.getElementById('modalImage');
+             currentPhotoIndex = photos.indexOf(imageSrc);
+             modal.style.display = "block";
+             modalImg.src = imageSrc;
+             updatePhotoCounter();
+         }
+
+         function openAllPhotos() {
+             openModal(photos[0]);
+         }
+
+         function closeModal() {
+             const modal = document.getElementById('photoModal');
+             modal.style.display = "none";
+         }
+
+         function changePhoto(direction) {
+             currentPhotoIndex = (currentPhotoIndex + direction + photos.length) % photos.length;
+             const modalImg = document.getElementById('modalImage');
+             modalImg.src = photos[currentPhotoIndex];
+             updatePhotoCounter();
+         }
+
+         function updatePhotoCounter() {
+             const counter = document.getElementById('photoCounter');
+             counter.textContent = `${currentPhotoIndex + 1} / ${photos.length}`;
+         }
+
+         // Close modal when clicking outside the image
+         window.onclick = function(event) {
+             const modal = document.getElementById('photoModal');
+             if (event.target == modal) {
+                 modal.style.display = "none";
+             }
+         }
+
+         // Keyboard navigation
+         document.addEventListener('keydown', function(event) {
+             const modal = document.getElementById('photoModal');
+             if (modal.style.display === "block") {
+                 if (event.key === 'Escape') {
+                     closeModal();
+                 } else if (event.key === 'ArrowLeft') {
+                     changePhoto(-1);
+                 } else if (event.key === 'ArrowRight') {
+                     changePhoto(1);
+                 }
+             }
+         });
+
+                 // Reviews Slider Functionality
+         document.addEventListener('DOMContentLoaded', function() {
+             const slider = document.getElementById('reviews-slider');
+             const leftArrow = document.getElementById('review-left');
+             const rightArrow = document.getElementById('review-right');
+             
+             if (slider && leftArrow && rightArrow) {
+                 const cardWidth = 330; // card width + gap
+                 
+                 function updateArrows() {
+                     const isAtStart = slider.scrollLeft === 0;
+                     const isAtEnd = slider.scrollLeft >= slider.scrollWidth - slider.clientWidth - 10;
+                     
+                     leftArrow.classList.toggle('disabled', isAtStart);
+                     rightArrow.classList.toggle('disabled', isAtEnd);
+                 }
+                 
+                 leftArrow.addEventListener('click', function() {
+                     if (!leftArrow.classList.contains('disabled')) {
+                         slider.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+                     }
+                 });
+                 
+                 rightArrow.addEventListener('click', function() {
+                     if (!rightArrow.classList.contains('disabled')) {
+                         slider.scrollBy({ left: cardWidth, behavior: 'smooth' });
+                     }
+                 });
+                 
+                 slider.addEventListener('scroll', updateArrows);
+                 
+                 // Initialize arrow states
+                 updateArrows();
+                 
+                 // Center the middle card on load
+                 const cards = slider.querySelectorAll('.review-card');
+                 if (cards.length > 0) {
+                     const middleIndex = Math.floor(cards.length / 2);
+                     const cardWidth = 330; // card width + gap
+                     const centerOffset = (slider.clientWidth - cards[0].offsetWidth) / 2;
+                     slider.scrollLeft = (middleIndex * cardWidth) - centerOffset;
+                 }
+                 
+                 // Touch/swipe support for mobile
+                 let isDown = false;
+                 let startX;
+                 let scrollLeft;
+                 
+                 slider.addEventListener('mousedown', function(e) {
+                     isDown = true;
+                     slider.style.cursor = 'grabbing';
+                     startX = e.pageX - slider.offsetLeft;
+                     scrollLeft = slider.scrollLeft;
+                 });
+                 
+                 slider.addEventListener('mouseleave', function() {
+                     isDown = false;
+                     slider.style.cursor = 'grab';
+                 });
+                 
+                 slider.addEventListener('mouseup', function() {
+                     isDown = false;
+                     slider.style.cursor = 'grab';
+                 });
+                 
+                 slider.addEventListener('mousemove', function(e) {
+                     if (!isDown) return;
+                     e.preventDefault();
+                     const x = e.pageX - slider.offsetLeft;
+                     const walk = (x - startX) * 2;
+                     slider.scrollLeft = scrollLeft - walk;
+                 });
+             }
+         });
+    </script>
+</body>
+</html> 

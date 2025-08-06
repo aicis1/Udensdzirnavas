@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telpu Īre - Viesu nams "Ūdensdzirnavas"</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #d4af37;
+      --white: #f3f3f3;
+      --overlay-dark: rgba(34, 34, 34, 0.55);
+      --overlay-gradient: linear-gradient(180deg, rgba(34,34,34,0.55) 60%, rgba(34,34,34,0.85) 100%);
+      --headline-size: 3.5rem;
+      --subheadline-size: 1.35rem;
+      --button-radius: 999px;
+      --button-padding: 0.9em 2.2em;
+      --transition: 0.25s cubic-bezier(.4,0,.2,1);
+    }
+    
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #FAF0E6;
+      color: #222;
+    }
+    
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    /* Header Styles */
+    .header {
+      background: #FAF0E6;
+      box-shadow: 0 2px 16px rgba(34,34,34,0.13);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: opacity 0.3s ease;
+    }
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      height: 50px;
+      width: auto;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: #222;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+    
+    .back-btn {
+      background: var(--gold);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .back-btn:hover {
+      background: #b8941f;
+      transform: translateY(-2px);
+    }
+    
+    /* Mobile Menu Styles */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #222;
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: color 0.3s ease;
+    }
+    
+    .mobile-menu-btn:hover {
+      color: var(--gold);
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #FAF0E6;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-top: 1px solid #e0e0e0;
+      z-index: 999;
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+    
+    .mobile-menu a {
+      display: block;
+      padding: 1rem 2rem;
+      color: #222;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background-color 0.3s ease;
+    }
+    
+    .mobile-menu a:hover {
+      background-color: #f0e6d6;
+      color: var(--gold);
+    }
+    
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+    
+    .mobile-menu .back-btn {
+      margin: 1rem 2rem;
+      text-align: center;
+      display: inline-block;
+    }
+    
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 60vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+    
+    .hero-slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    
+    .hero-slide {
+      min-width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .hero-slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(rgba(34,34,34,0.6), rgba(34,34,34,0.6));
+      z-index: 1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+    
+    .hero-content h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 32px rgba(34,34,34,0.32);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    
+    .hero-content.active h1 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .hero-content p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 0 auto;
+      text-shadow: 0 2px 12px rgba(34,34,34,0.22);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease 0.2s;
+    }
+    
+    .hero-content.active p {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Hero Navigation */
+    .hero-nav {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 3;
+    }
+    
+    .hero-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .hero-dot.active {
+      background: var(--gold);
+      border-color: #fff;
+      transform: scale(1.2);
+    }
+    
+    .hero-dot:hover {
+      background: var(--gold);
+      transform: scale(1.1);
+    }
+    
+    /* Hero Arrows */
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 3;
+    }
+    
+    .hero-arrow:hover {
+      background: var(--gold);
+      color: #222;
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    .hero-prev {
+      left: 20px;
+    }
+    
+    .hero-next {
+      right: 20px;
+    }
+    
+         /* Main Content */
+     .main-content {
+       max-width: 1400px;
+       margin: 0 auto;
+       padding: 4rem 2rem 0 2rem;
+       background: #FAF0E6;
+     }
+    
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      color: #222;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-bottom: 0;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .service-card {
+      background: #f7f5ed;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1.5px solid #e2d7b7;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 32px rgba(212, 175, 55, 0.18);
+      border-color: #d4af37;
+    }
+    
+    .service-image {
+      height: 300px;
+      overflow: hidden;
+    }
+    
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .service-card:hover .service-image img {
+      transform: scale(1.05);
+    }
+    
+    .service-info {
+      padding: 2.5rem;
+    }
+    
+    .service-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 1rem;
+    }
+    
+    .service-description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .service-features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 2rem;
+    }
+    
+    .service-features li {
+      padding: 0.5rem 0;
+      color: #555;
+      position: relative;
+      padding-left: 1.5rem;
+      font-size: 1rem;
+    }
+    
+    .service-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: bold;
+    }
+    
+    .service-features .disclaimer {
+      font-size: 0.8rem;
+      color: #999;
+      font-style: italic;
+      margin-left: 0.5rem;
+    }
+    
+    .service-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    
+    .service-price .vat {
+      font-size: 1rem;
+      color: #666;
+      font-weight: 400;
+    }
+    
+    .book-btn {
+      background: #222;
+      color: #fff;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1.1rem;
+    }
+    
+    .book-btn:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+    }
+    
+    /* Booking Info Section */
+    .booking-info {
+      background: linear-gradient(135deg, #FAF0E6 0%, #ffffff 100%);
+      padding: 4rem 3rem;
+      border-radius: 20px;
+      margin: 4rem 0;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      border: 1px solid #e8e8e8;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .booking-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), #b8941f, var(--gold));
+      border-radius: 20px 20px 0 0;
+    }
+    
+    .booking-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .booking-info h3::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    
+    .booking-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+    
+    .booking-item {
+      background: linear-gradient(135deg, #ffffff 0%, #faf9f5 100%);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid #e2d7b7;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+    
+    .booking-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    
+    .booking-icon {
+      font-size: 2.5rem;
+      color: var(--gold);
+      background: linear-gradient(135deg, #FAF0E6, #f7f5ed);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+      flex-shrink: 0;
+    }
+    
+    .booking-text {
+      color: #333;
+      line-height: 1.7;
+      flex: 1;
+    }
+    
+    .booking-text strong {
+      color: #222;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    
+         /* Amenities Section */
+     .amenities-section {
+       padding: 4rem 0;
+       background: linear-gradient(135deg, #FAF0E6 0%, #f7f5ed 100%);
+     }
+     
+     .amenities-section .container {
+       max-width: 1400px;
+       margin: 0 auto;
+       padding: 0 2rem;
+     }
+     
+     .amenities-section h2 {
+       font-family: 'Playfair Display', serif;
+       font-size: 2.5rem;
+       font-weight: 700;
+       text-align: center;
+       color: #222;
+       margin-bottom: 3rem;
+       position: relative;
+     }
+     
+     .amenities-section h2::after {
+       content: '';
+       position: absolute;
+       bottom: -10px;
+       left: 50%;
+       transform: translateX(-50%);
+       width: 80px;
+       height: 3px;
+       background: var(--gold);
+       border-radius: 2px;
+     }
+     
+     .amenities-grid {
+       display: grid;
+       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+       gap: 2rem;
+       margin-top: 2rem;
+     }
+     
+     .amenity {
+       background: linear-gradient(135deg, #ffffff 0%, #faf9f5 100%);
+       padding: 2.5rem 2rem;
+       border-radius: 15px;
+       box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+       border: 1px solid #e2d7b7;
+       transition: transform 0.3s ease, box-shadow 0.3s ease;
+       text-align: center;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       gap: 1rem;
+     }
+     
+     .amenity:hover {
+       transform: translateY(-5px);
+       box-shadow: 0 8px 30px rgba(212, 175, 55, 0.15);
+       border-color: #d4af37;
+     }
+     
+     .amenity-icon {
+       font-size: 3rem;
+       margin-bottom: 0.5rem;
+       display: block;
+     }
+     
+     .amenity h4 {
+       font-family: 'Playfair Display', serif;
+       font-size: 1.3rem;
+       font-weight: 700;
+       color: #222;
+       margin: 0 0 0.5rem 0;
+     }
+     
+     .amenity p {
+       color: #666;
+       line-height: 1.6;
+       margin: 0;
+       font-size: 1rem;
+     }
+     
+     /* Footer Styles */
+     .footer {
+       background: #1a1a1a;
+       color: #fff;
+       padding: 60px 0 20px;
+     }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-section ul li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-section ul li a {
+      color: #ccc;
+      text-decoration: none;
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-section ul li a:hover {
+      color: var(--gold);
+    }
+    
+    .footer-section ul li:not(:has(a)) {
+      color: #ccc;
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 0.95rem;
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      text-align: center;
+    }
+    
+    .footer-bottom p {
+      color: #999;
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    .design-credit {
+      margin-top: 8px !important;
+      font-size: 0.8rem !important;
+      color: #666 !important;
+    }
+    
+    .company-name {
+      color: var(--gold);
+      font-weight: 500;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        padding: 1rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .hero {
+        height: 50vh;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+      
+      .hero-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+      
+      .hero-prev {
+        left: 10px;
+      }
+      
+      .hero-next {
+        right: 10px;
+      }
+      
+      .hero-nav {
+        bottom: 20px;
+      }
+      
+      .hero-dot {
+        width: 10px;
+        height: 10px;
+      }
+      
+      .main-content {
+        padding: 2rem 1rem;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0;
+      }
+      
+      .service-card {
+        grid-column: span 1;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .booking-info {
+        padding: 3rem 1.5rem;
+        margin: 3rem 0;
+      }
+      
+      .booking-info h3 {
+        font-size: 2rem;
+      }
+      
+      .booking-details {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .booking-item {
+        padding: 1.5rem;
+      }
+      
+             .booking-icon {
+         font-size: 2rem;
+         padding: 0.8rem;
+       }
+       
+       .amenities-section {
+         padding: 3rem 0;
+       }
+       
+       .amenities-section h2 {
+         font-size: 2rem;
+       }
+       
+       .amenities-grid {
+         grid-template-columns: 1fr;
+         gap: 1.5rem;
+       }
+       
+       .amenity {
+         padding: 2rem 1.5rem;
+       }
+       
+       .amenity-icon {
+         font-size: 2.5rem;
+       }
+      
+      .footer {
+        padding: 40px 0 20px;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 15px;
+      }
+      
+      .footer-section h3 {
+        font-size: 1.2rem;
+        text-align: center;
+      }
+      
+      .footer-section ul {
+        text-align: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero {
+        height: 45vh;
+      }
+      
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-content p {
+        font-size: 1rem;
+        padding: 0 1rem;
+      }
+      
+      .hero-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+      }
+      
+      .hero-prev {
+        left: 5px;
+      }
+      
+      .hero-next {
+        right: 5px;
+      }
+      
+      .hero-nav {
+        bottom: 15px;
+        gap: 8px;
+      }
+      
+      .hero-dot {
+        width: 8px;
+        height: 8px;
+      }
+      
+      .service-info {
+        padding: 1.5rem;
+      }
+      
+      .service-title {
+        font-size: 1.5rem;
+      }
+      
+      .service-price {
+        font-size: 1.5rem;
+      }
+      
+      .book-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <img src="./Images/melns.png" alt="Viesu nams Ūdensdzirnavas logo" class="logo">
+      
+      <!-- Desktop Navigation -->
+      <nav class="nav-links">
+        <a href="index.html">Sākums</a>
+        <a href="index.html#par">Par mums</a>
+        <a href="index.html#pakalpojumi">Pakalpojumi</a>
+        <a href="index.html#kontakti">Kontakti</a>
+      </nav>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="index.html">Sākums</a>
+      <a href="index.html#par">Par mums</a>
+      <a href="index.html#pakalpojumi">Pakalpojumi</a>
+      <a href="index.html#kontakti">Kontakti</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-slider" id="hero-slider">
+      <div class="hero-slide" style="background-image: url('./Images/telpuire.jpg');">
+        <div class="hero-content active">
+          <h1>Telpu Īre</h1>
+          <p>Elegantas zāles un terases jūsu īpašajiem pasākumiem. Piedāvājam ideālas telpas kāzām, semināriem un citiem pasākumiem.</p>
+        </div>
+      </div>
+      
+      <div class="hero-slide" style="background-image: url('./Images/pirts.jpeg');">
+        <div class="hero-content">
+          <h1>Pirts un baseins</h1>
+          <p>Patīkama atmosfēra atpūtai līdz 25 personām. Cena 50 €/stundā. Lieliski piemērota draugu tikšanās reizēm, ģimenes vakariem vai nelieliem pasākumiem.</p>
+        </div>
+      </div>
+      
+      <div class="hero-slide" style="background-image: url('./Images/laukums.jpeg');">
+        <div class="hero-content">
+          <h1>Basketbola/tenisa un futbola laukums</h1>
+          <p>Kvalitatīvi āra laukumi basketbolam, tenisam un futbolam – ideāli gan draudzīgām spēlēm, gan treniņiem.</p>
+        </div>
+      </div>
+      
+      <div class="hero-slide" style="background-image: url('./Images/pelde.jpeg');">
+        <div class="hero-content">
+          <h1>Peldvieta ar laivu un katamarānu</h1>
+          <p>Skaista un sakopta peldvieta mierīgai atpūtai pie ūdens. Pieejama laiva un katamarāns izbraucieniem</p>
+        </div>
+      </div>
+      
+      <div class="hero-slide" style="background-image: url('./Images/galds.jpg');">
+        <div class="hero-content">
+          <h1>Svinību galdu klāšana</h1>
+          <p>Gaumīga galdu klāšana dažādiem pasākumiem – kāzām, jubilejām, dzimšanas dienām un citiem svētkiem. Individuāla pieeja un gardas maltītes!</p>
+        </div>
+      </div>
+      
+      <div class="hero-slide" style="background-image: url('./Images/dekors2.jpg');">
+        <div class="hero-content">
+          <h1>Dekoratora pakalpojumi</h1>
+          <p>Radām unikālu un personalizētu atmosfēru jūsu pasākumam – no kāzām līdz jubilejām. Saskaņots noformējums, stilīgas detaļas un rūpes par svētku noskaņu.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Hero Navigation Dots -->
+    <div class="hero-nav">
+      <div class="hero-dot active" onclick="goToSlide(0)"></div>
+      <div class="hero-dot" onclick="goToSlide(1)"></div>
+      <div class="hero-dot" onclick="goToSlide(2)"></div>
+      <div class="hero-dot" onclick="goToSlide(3)"></div>
+      <div class="hero-dot" onclick="goToSlide(4)"></div>
+      <div class="hero-dot" onclick="goToSlide(5)"></div>
+    </div>
+    
+    <!-- Hero Navigation Arrows -->
+    <button class="hero-arrow hero-prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="hero-arrow hero-next" onclick="changeSlide(1)">&#10095;</button>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Services -->
+    <section>
+      <h2 class="section-title">Mūsu Pakalpojumi</h2>
+      <div class="services-grid">
+        <!-- Wedding/Event Hall -->
+        <div class="service-card">
+          <div class="service-image">
+            <img src="./Images/prieksa.jpg" alt="Kāzu zāle">
+          </div>
+          <div class="service-info">
+            <h3 class="service-title">Kāzu un Pasākumu Zāle</h3>
+            <p class="service-description">Mūsu banketzāle ar terasi ir ideāla vieta jūsu īpašajai dienai. Piedāvājam pilnu pakalpojumu no 17:00 līdz 12:00 nākamajā dienā.</p>
+                         <ul class="service-features">
+               <li>Banketzāle līdz 80 viesiem</li>
+               <li>Terase ar skatu uz dīķi</li>
+               <li>Vieta laulību ceremonijai</li>
+               <li>Parkinga vieta</li>
+               <li>Dekorācijas iespējas</li>
+               <li>Ēdināšanas pakalpojumi<span class="disclaimer">(Par papildus samaksu)</span></li>
+             </ul>
+            <div class="service-price">
+              850€ <span class="vat">+ PVN</span>
+            </div>
+            <a href="tel:+37129172252" class="book-btn">Rezervēt</a>
+          </div>
+        </div>
+
+        <!-- Seminar Hall -->
+        <div class="service-card">
+          <div class="service-image">
+            <img src="./Images/telpas.jpg" alt="Semināru zāle">
+          </div>
+          <div class="service-info">
+            <h3 class="service-title">Semināru Zāle</h3>
+                         <p class="service-description">Telpas semināriem, apmācībām un biznesa pasākumiem.</p>
+                         <ul class="service-features">
+               <li>Plaša zāle</li>
+               <li>Wi-Fi internets</li>
+               <li>Kafijas pauzes</li>
+               <li>Elastīgs laika grafiks</li>
+               <li>Ēdināšanas pakalpojumi<span class="disclaimer">(Par papildus samaksu)</span></li>
+             </ul>
+            <div class="service-price">
+              50€ <span class="vat">+ PVN stundā</span>
+            </div>
+            <a href="tel:+37129172252" class="book-btn">Rezervēt</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+   </main>
+
+   <!-- Amenities Section -->
+   <section id="amenities" class="amenities-section">
+     <div class="container">
+               <h2>Ērtības</h2>
+        <div class="amenities-grid">
+          <div class="amenity">
+            <span class="amenity-icon">🅿️</span>
+            <h4>Bezmaksas Parkinga</h4>
+            <p>Ērts parkinga vietas pieejams visiem viesiem un pasākumu dalībniekiem</p>
+          </div>
+          
+          <div class="amenity">
+            <span class="amenity-icon">📶</span>
+            <h4>Bezmaksas Wi-Fi</h4>
+            <p>Ātrs internets visā telpā nepārtrauktai savienojamībai</p>
+          </div>
+          
+                    <div class="amenity">
+             <span class="amenity-icon">🌿</span>
+             <h4>Apkārtne</h4>
+             <p>Skaistas āra telpas ideālas ceremonijām un foto sesijām</p>
+           </div>
+          
+                    <div class="amenity">
+             <span class="amenity-icon">☕</span>
+             <h4>Ēdināšanas Pakalpojumi</h4>
+             <p>Profesionāli ēdināšanas pakalpojumi visiem pasākumu veidiem</p>
+           </div>
+         
+         
+       </div>
+     </div>
+   </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Galvenās lapas</h3>
+        <ul>
+          <li><a href="index.html">Sākums</a></li>
+          <li><a href="index.html#par">Par mums</a></li>
+          <li><a href="index.html#pakalpojumi">Pakalpojumi</a></li>
+          <li><a href="index.html#kontakti">Kontakti</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Informācija</h3>
+        <ul>
+          <li><a href="index.html#kontakti">Kontakti</a></li>
+          <li><a href="tel:+37129172252">Uzzināt cenu</a></li>
+          <li><a href="under-construction.html">Privātuma politika</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Kontaktinformācija</h3>
+        <ul>
+          <li><a href="mailto:udens_dzirnavas@inbox.lv">udens_dzirnavas@inbox.lv</a></li>
+          <li><a href="tel:+37129172252">29172252</a> / <a href="tel:+37129940066">29940066</a></li>
+          <li>Ūdensdzirnavas, Strazde, Strazdes pagasts, LV-3291</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Viesu nams "Ūdensdzirnavas". Visas tiesības aizsargātas</p>
+      <p class="design-credit">Mājas lapu Izstrādāja <span class="company-name">SIA A&J Marketing group</span></p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('active');
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      
+      if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+      }
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', function() {
+        document.getElementById('mobile-menu').classList.remove('active');
+      });
+    });
+    
+    // Hero Slider Functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    const slider = document.getElementById('hero-slider');
+    let slideInterval;
+    
+    // Initialize hero slider
+    function initHeroSlider() {
+      updateSlider();
+      startAutoSlide();
+      
+      // Add touch/swipe support
+      let startX = 0;
+      let endX = 0;
+      
+      slider.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        clearInterval(slideInterval);
+      });
+      
+      slider.addEventListener('touchend', function(e) {
+        endX = e.changedTouches[0].clientX;
+        handleSwipe();
+        startAutoSlide();
+      });
+      
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            // Swipe left - next slide
+            changeSlide(1);
+          } else {
+            // Swipe right - previous slide
+            changeSlide(-1);
+          }
+        }
+      }
+    }
+    
+    // Update slider position and content
+    function updateSlider() {
+      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      // Update dots
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+      
+      // Update content animations
+      const contents = document.querySelectorAll('.hero-content');
+      contents.forEach((content, index) => {
+        content.classList.toggle('active', index === currentSlide);
+      });
+    }
+    
+    // Change slide
+    function changeSlide(direction) {
+      currentSlide = (currentSlide + direction + slides.length) % slides.length;
+      updateSlider();
+    }
+    
+    // Go to specific slide
+    function goToSlide(index) {
+      currentSlide = index;
+      updateSlider();
+      startAutoSlide(); // Reset auto-slide timer
+    }
+    
+    // Start auto-slide
+    function startAutoSlide() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(() => {
+        changeSlide(1);
+      }, 5000); // Change slide every 5 seconds
+    }
+    
+    // Pause auto-slide on hover
+    slider.addEventListener('mouseenter', () => {
+      clearInterval(slideInterval);
+    });
+    
+    slider.addEventListener('mouseleave', () => {
+      startAutoSlide();
+    });
+    
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      initHeroSlider();
+    });
+  </script>
+</body>
+</html> 
